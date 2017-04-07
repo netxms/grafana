@@ -1,7 +1,7 @@
 {
   "name": "NetXMS",
   "private": false,
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "NetXMS datasource for Grafana",
   "scripts": {
     "build": "./node_modules/grunt-cli/bin/grunt",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@10.3.0.4:/private/grafana.git"
+    "url": "https://github.com/netxms/grafana.git"
   },
   "author": "Raden Solutions",
   "license": "GPL",
   "bugs": {
-    "url": "https://track.radensolutions.com/issues"
+    "url": "https://track.radensolutions.com/"
   },
   "engines": {
     "node": "6.10.0"
