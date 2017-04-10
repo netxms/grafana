@@ -23,7 +23,8 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
                     'ng-change="inputChange()"' +
                     'ng-focus="inputFocus()"' +
                     'ng-blur="inputBlur($event)"' +
-                    'class="gf-form-input"' +
+                    'class="gf-form-input' +
+                    ' width-25"' +
                     'input>' +
               '<ul ng-show="dropdownVisible">' +
                 '<li ng-repeat="item in dropdownItems"' +
