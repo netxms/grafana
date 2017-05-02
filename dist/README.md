@@ -1,4 +1,7 @@
 # Grafana datasource for NetXMS open source monitoring system
+
+![Alt text](/src/img/grafana-screen.png)
+
 We have finally developed a datasource that provides the possibility to create beautiful graphs using Grafana!
 The datasource is in active development, to report bugs or create feature suggestions, please visit [our issue tracker](https://track.radensolutions.com/)
 

@@ -1,6 +1,6 @@
 {
   "name": "NetXMS",
-  "id": "netxms-grafana-datasource",
+  "id": "radensolutions-netxms-datasource",
   "type": "datasource",
 
   "partials": {
