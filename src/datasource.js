@@ -5,63 +5,63 @@ export class NetXMSDatasource {
   constructor(instanceSettings, $q, backendSrv, templateSrv)
   {
     this.type = instanceSettings.type;
-    if (instanceSettings.jsonData.url.endsWith("/"))
-      this.url = instanceSettings.jsonData.url.slice(0, (instanceSettings.jsonData.url.length-1));
-    else
-      this.url = instanceSettings.jsonData.url;
+    this.url = instanceSettings.url;
     this.name = instanceSettings.name;
-    this.user = instanceSettings.jsonData.user;
-    this.password = (instanceSettings.jsonData.password == null) ? "" : instanceSettings.jsonData.password;
     this.q = $q;
     this.backendSrv = backendSrv;
     this.templateSrv = templateSrv;
-    this.authentication = "{ \"login\": \"" + this.user + "\", \"password\": \"" + this.password + "\" }";
     this.sessionId = 0;
+    this.basicAuth = instanceSettings.basicAuth;
+    this.withCredentials = instanceSettings.withCredentials;
+
+    this._request = function(method, url, data, params) {
+      var options = {
+        url: this.url + "/" + url,
+        method: method,
+        data: data,
+        headers: {},
+        params: params
+      };
+
+      if (this.basicAuth || this.withCredentials) {
+        options.withCredentials = true;
+      }
+      if (this.basicAuth) {
+        options.headers["Authorization"] = this.basicAuth;
+      }
+      if (this.sessionId)
+        options.headers["Session-Id"] = this.sessionId;
+
+      return backendSrv.datasourceRequest(options).then(response =>
+        {
+          if (response.headers("Session-Id"))
+            this.sessionId = response.headers("Session-Id");
+          return response;
+        });
+    };
   }
 
   query(options)
   {
     var query = this.buildQueryParameters(options);
     if (query.targets.includes("type\":\"Alarms\""))
-      var url = "alarms";
+      var url = "grafana/alarms";
     else
-      var url = "datacollection";
+      var url = "grafana/datacollection";
 
-    return this.backendSrv.datasourceRequest(
-    {
-      url: this.url + '/grafana/' + url,
-      method: 'GET',
-      params: query,
-      headers: { 'X-SessionId': this.sessionId,
-                 'X-Login': this.user,
-                 'X-Password': this.password }
-    }).then(result => {
-      if (result.headers("X-SessionId") !== null)
-        this.sessionId = result.headers("X-SessionId");
-      return result });
+    return this._request('GET', url, null, query);
   }  
 
   testDatasource()
   {
-    return this.backendSrv.datasourceRequest(
+    return this._request('POST', 'sessions', null, null).then(response =>
     {
-      url: this.url + '/sessions',
-      method: 'POST',
-      data: this.authentication,
-      headers: { 'Content-Type': 'application/json' }
-    }).then(response => 
+      if (response.status === 200)
       {
-        if (response.status === 200)
-        {
-          this.backendSrv.datasourceRequest(
-          {
-            url: this.url + '/sessions/' + response.data.session,
-            method: 'DELETE',
-            headers: { 'X-SessionId': response.data.session } 
-          })
-          return { status: "success", message: "Data source is working", title: "Success" };
-        }
-      });
+        this._request('DELETE', 'sessions/' + response.data.session, null, null);
+        return { status: "success", message: "Data source is working", title: "Success" };
+      }
+    });
   }
 
   /*
@@ -92,14 +92,11 @@ export class NetXMSDatasource {
 
   metricFindQuery(options, url)
   {
-    return this.backendSrv.datasourceRequest({
-      url: this.url + '/grafana/' + url,
-      method: 'GET',
-      params: options,
-      headers: { 'X-SessionId': this.sessionId,
-                 'X-Login': this.user,
-                 'X-Password': this.password }
-    }).then(this.mapToTextValue);
+    return this._request('GET', 'grafana/' + url, null, options).then(
+      result =>
+      {
+        return this.mapToTextValue(result);
+      });
   }
 
   mapToTextValue(result)
