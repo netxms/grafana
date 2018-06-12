@@ -12,7 +12,7 @@ The datasource is in active development, to report bugs or create feature sugges
 ### Installation instructions:
 1. Clone the repository to your ```GRAFANA_HOME/data/plugins/datasources``` directory
 2. Restart your Grafana server
-3. Login to your Grafana web interface and add the NetXMS datasource in the Data Sources section
+3. Login to your Grafana web interface and add the NetXMS datasource in the Data Sources section by selecting "Basic Auth" in the "Auth" section and, if using "Browser" access, select "With Credentials"
 
 ### Development instructions:
 1. Clone the repository to your ```GRAFANA_HOME/data/plugins/datasources``` directory
