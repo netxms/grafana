@@ -25,6 +25,7 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
                     'ng-blur="inputBlur($event)"' +
                     'class="gf-form-input' +
                     ' width-25"' +
+                    'autocomplete="off"' +
                     'input>' +
               '<ul ng-show="dropdownVisible">' +
                 '<li ng-repeat="item in dropdownItems"' +
@@ -41,13 +42,14 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
     {
       var pressedDropdown = false;
       scope.activeItemIndex = 0;
-      scope.inputValue = scope.selectedItem ? scope.selectedItem.name : '';
+      scope.selectedItem = _.isEmpty(scope.selectedItem) ? {name: "", id: 0} : scope.selectedItem;
+      scope.inputValue = scope.selectedItem.name;
       scope.dropdownVisible = false;
 
       scope.$watch('dropdownItems', function(newValue, oldValue)
       {
         if (!angular.equals(newValue, oldValue))
-          scope.setActive(0);
+          scope.setActive(-1);
       });
 
       scope.$watch('selectedItem', function(newValue, oldValue)
@@ -77,12 +79,13 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
       scope.inputFocus = function()
       {
         getFilteredList();
-        scope.setActive(0);
+        scope.setActive(-1);
         showDropdown();
       };
 
       scope.inputBlur = function(event)
       {
+        selectActiveItem();
         if (pressedDropdown)
         {
           pressedDropdown = false;
@@ -126,7 +129,7 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
       var selectPreviousItem = function()
       {
         var prevIndex = scope.activeItemIndex - 1;
-        if (prevIndex >= 0)
+        if (prevIndex >= -1)
           scope.setActive(prevIndex);
       };
 
@@ -141,6 +144,8 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
       {
         if (scope.activeItemIndex >= 0 && scope.activeItemIndex < scope.dropdownItems.length)
           scope.selectItem(scope.dropdownItems[scope.activeItemIndex]);
+        else
+          scope.selectItem({name: scope.inputValue ? scope.inputValue : "", id: 0});
       };
 
       element.bind("keydown keypress", function (event)
@@ -154,11 +159,8 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
             scope.$apply(selectNextItem);
             break;
           case 13: // return
-            if (scope.dropdownVisible && scope.dropdownItems && scope.dropdownItems.length > 0)
-            {
-              event.preventDefault();
-              scope.$apply(selectActiveItem);
-            }
+            event.preventDefault();
+            scope.$apply(selectActiveItem);
             break;
         }
       });

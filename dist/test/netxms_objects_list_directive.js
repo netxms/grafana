@@ -21,15 +21,17 @@ _angular2.default.module('grafana.directives').directive('netxmsObjectList', fun
       inputPlaceholder: '@',
       onSelection: '&'
     },
-    template: '<div class="netxms-object-list">' + '<input type="text"' + 'spellcheck="false"' + 'name="{{name}}"' + 'placeholder="{{inputPlaceholder}}"' + 'ng-model="inputValue"' + 'ng-change="inputChange()"' + 'ng-focus="inputFocus()"' + 'ng-blur="inputBlur($event)"' + 'class="gf-form-input' + ' width-25"' + 'input>' + '<ul ng-show="dropdownVisible">' + '<li ng-repeat="item in dropdownItems"' + 'ng-click="selectItem(item)"' + 'ng-mouseenter="setActive($index)"' + 'ng-mousedown="dropdownPressed()"' + 'ng-class="{\'active\': activeItemIndex === $index}"' + '>' + '<span>{{item.name}}</span>' + '</li>' + '</ul>' + '</div>',
+    template: '<div class="netxms-object-list">' + '<input type="text"' + 'spellcheck="false"' + 'name="{{name}}"' + 'placeholder="{{inputPlaceholder}}"' + 'ng-model="inputValue"' + 'ng-change="inputChange()"' + 'ng-focus="inputFocus()"' + 'ng-blur="inputBlur($event)"' + 'class="gf-form-input' + ' width-25"' + 'autocomplete="off"' + 'input>' + '<ul ng-show="dropdownVisible">' + '<li ng-repeat="item in dropdownItems"' + 'ng-click="selectItem(item)"' + 'ng-mouseenter="setActive($index)"' + 'ng-mousedown="dropdownPressed()"' + 'ng-class="{\'active\': activeItemIndex === $index}"' + '>' + '<span>{{item.name}}</span>' + '</li>' + '</ul>' + '</div>',
     link: function link(scope, element) {
       var pressedDropdown = false;
       scope.activeItemIndex = 0;
-      scope.inputValue = scope.selectedItem ? scope.selectedItem.name : '';
+      scope.selectedItem = _lodash2.default.isEmpty(scope.selectedItem) ? { name: "", id: 0 } : scope.selectedItem;
+      console.log(scope.selectedItem);
+      scope.inputValue = scope.selectedItem.name;
       scope.dropdownVisible = false;
 
       scope.$watch('dropdownItems', function (newValue, oldValue) {
-        if (!_angular2.default.equals(newValue, oldValue)) scope.setActive(0);
+        if (!_angular2.default.equals(newValue, oldValue)) scope.setActive(-1);
       });
 
       scope.$watch('selectedItem', function (newValue, oldValue) {
@@ -53,11 +55,12 @@ _angular2.default.module('grafana.directives').directive('netxmsObjectList', fun
 
       scope.inputFocus = function () {
         getFilteredList();
-        scope.setActive(0);
+        scope.setActive(-1);
         showDropdown();
       };
 
       scope.inputBlur = function (event) {
+        selectActiveItem();
         if (pressedDropdown) {
           pressedDropdown = false;
           return;
@@ -92,7 +95,7 @@ _angular2.default.module('grafana.directives').directive('netxmsObjectList', fun
 
       var selectPreviousItem = function selectPreviousItem() {
         var prevIndex = scope.activeItemIndex - 1;
-        if (prevIndex >= 0) scope.setActive(prevIndex);
+        if (prevIndex >= -1) scope.setActive(prevIndex);
       };
 
       var selectNextItem = function selectNextItem() {
@@ -101,7 +104,7 @@ _angular2.default.module('grafana.directives').directive('netxmsObjectList', fun
       };
 
       var selectActiveItem = function selectActiveItem() {
-        if (scope.activeItemIndex >= 0 && scope.activeItemIndex < scope.dropdownItems.length) scope.selectItem(scope.dropdownItems[scope.activeItemIndex]);
+        if (scope.activeItemIndex >= 0 && scope.activeItemIndex < scope.dropdownItems.length) scope.selectItem(scope.dropdownItems[scope.activeItemIndex]);else scope.selectItem({ name: scope.inputValue ? scope.inputValue : "", id: 0 });
       };
 
       element.bind("keydown keypress", function (event) {
@@ -116,10 +119,11 @@ _angular2.default.module('grafana.directives').directive('netxmsObjectList', fun
             break;
           case 13:
             // return
-            if (scope.dropdownVisible && scope.dropdownItems && scope.dropdownItems.length > 0) {
-              event.preventDefault();
-              scope.$apply(selectActiveItem);
-            }
+            //if (scope.dropdownVisible && scope.dropdownItems && scope.dropdownItems.length > 0)
+            //{
+            event.preventDefault();
+            scope.$apply(selectActiveItem);
+            //}
             break;
         }
       });

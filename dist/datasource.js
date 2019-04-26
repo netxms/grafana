@@ -116,6 +116,7 @@ System.register(["lodash"], function (_export, _context) {
         }, {
           key: "buildQueryParameters",
           value: function buildQueryParameters(options) {
+            console.log(options);
             var parameters = {
               interval: options.intervalMs,
               from: options.range.from,
