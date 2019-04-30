@@ -11,21 +11,35 @@ export class NetXMSDatasourceQueryCtrl extends QueryCtrl {
     this.uiSegmentSrv = uiSegmentSrv;
     this.target.type = this.target.type || 'DCI';
     this.target.alarmSource = this.target.alarmSource;
+    console.log(this.target);
     this.target.dciTarget = this.target.dciTarget;
     this.target.dci = this.target.dci;
     this.target.legend = this.target.legend || '';
+    this.objectList = [];
+    this.dciList = [];
+    this.objectId = 0;
   }
 
   getObjects() 
   {
-    return this.datasource.metricFindQuery('', 'datacollection')
-      .then(result => { return result; });
+    if (_.isEmpty(this.objectList))
+    {
+      this.objectList = this.datasource.metricFindQuery('', 'datacollection')
+         .then(result => { return result; });
+    }
+    return this.objectList;
   }
 
   getDCIs()
   {
-    return this.datasource.metricFindQuery({ target: this.target.dciTarget ? this.target.dciTarget.id : 0 }, 'datacollection')
-      .then(result => { return result; });
+    if (this.objectId != this.target.dciTarget.id)
+    {
+      this.objectId = this.target.dciTarget.id;
+      this.dciList = this.datasource.metricFindQuery({ target: this.target.dciTarget ? this.target.dciTarget.id : 0 }, 'datacollection')
+         .then(result => { return result; });
+    }
+
+    return this.dciList;
   }
 
   getSourceObjects()
@@ -40,11 +54,12 @@ export class NetXMSDatasourceQueryCtrl extends QueryCtrl {
 
   clearDciField()
   {
-    this.target.dci = {};
+    this.target.dci = {name: "", id: 0};
   }
 
   onSelectionChange()
   {
+    console.log("onSelectionChange");
     this.panelCtrl.refresh();
   }
 }

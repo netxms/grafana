@@ -31,25 +31,37 @@ var NetXMSDatasourceQueryCtrl = exports.NetXMSDatasourceQueryCtrl = function (_Q
     _this.uiSegmentSrv = uiSegmentSrv;
     _this.target.type = _this.target.type || 'DCI';
     _this.target.alarmSource = _this.target.alarmSource;
+    console.log(_this.target);
     _this.target.dciTarget = _this.target.dciTarget;
     _this.target.dci = _this.target.dci;
     _this.target.legend = _this.target.legend || '';
+    _this.objectList = [];
+    _this.dciList = [];
+    _this.objectId = 0;
     return _this;
   }
 
   _createClass(NetXMSDatasourceQueryCtrl, [{
     key: 'getObjects',
     value: function getObjects() {
-      return this.datasource.metricFindQuery('', 'datacollection').then(function (result) {
-        return result;
-      });
+      if (_.isEmpty(this.objectList)) {
+        this.objectList = this.datasource.metricFindQuery('', 'datacollection').then(function (result) {
+          return result;
+        });
+      }
+      return this.objectList;
     }
   }, {
     key: 'getDCIs',
     value: function getDCIs() {
-      return this.datasource.metricFindQuery({ target: this.target.dciTarget ? this.target.dciTarget.id : 0 }, 'datacollection').then(function (result) {
-        return result;
-      });
+      if (this.objectId != this.target.dciTarget.id) {
+        this.objectId = this.target.dciTarget.id;
+        this.dciList = this.datasource.metricFindQuery({ target: this.target.dciTarget ? this.target.dciTarget.id : 0 }, 'datacollection').then(function (result) {
+          return result;
+        });
+      }
+
+      return this.dciList;
     }
   }, {
     key: 'getSourceObjects',
@@ -66,11 +78,12 @@ var NetXMSDatasourceQueryCtrl = exports.NetXMSDatasourceQueryCtrl = function (_Q
   }, {
     key: 'clearDciField',
     value: function clearDciField() {
-      this.target.dci = {};
+      this.target.dci = { name: "", id: 0 };
     }
   }, {
     key: 'onSelectionChange',
     value: function onSelectionChange() {
+      console.log("change");
       this.panelCtrl.refresh();
     }
   }]);
