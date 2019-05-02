@@ -11,7 +11,6 @@ export class NetXMSDatasourceQueryCtrl extends QueryCtrl {
     this.uiSegmentSrv = uiSegmentSrv;
     this.target.type = this.target.type || 'DCI';
     this.target.alarmSource = this.target.alarmSource;
-    console.log(this.target);
     this.target.dciTarget = this.target.dciTarget;
     this.target.dci = this.target.dci;
     this.target.legend = this.target.legend || '';
@@ -59,7 +58,6 @@ export class NetXMSDatasourceQueryCtrl extends QueryCtrl {
 
   onSelectionChange()
   {
-    console.log("onSelectionChange");
     this.panelCtrl.refresh();
   }
 }

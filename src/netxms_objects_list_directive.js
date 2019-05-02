@@ -41,7 +41,7 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
       link: function(scope, element)
       {
          var pressedDropdown = false;
-         scope.activeItemIndex = 0;
+         scope.activeItemIndex = -1;
          scope.selectedItem = _.isEmpty(scope.selectedItem) ? {name: "", id: 0} : scope.selectedItem;
          scope.inputValue = scope.selectedItem.name;
          scope.dropdownVisible = false;
@@ -71,15 +71,12 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
 
          scope.inputChange = function()
          {
-            console.log("inputChange");
-            scope.selectedItem = {name: "", id: 0};
             getFilteredList(scope.inputValue);
-            //showDropdown();
          };
 
          scope.inputFocus = function()
          {
-            getFilteredList();
+            getFilteredList(scope.inputValue);
             showDropdown();
          };
 
@@ -89,7 +86,6 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
             if (pressedDropdown)
             {
                pressedDropdown = false;
-               return;
             }
             hideDropdown();
          };
@@ -102,6 +98,7 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
          scope.selectItem = function(item)
          {
             scope.selectedItem = item;
+            console.log(item);
             hideDropdown();
          };
 
@@ -142,10 +139,10 @@ angular.module('grafana.directives').directive('netxmsObjectList', function()
 
          var selectActiveItem = function()
          {
-            if (scope.activeItemIndex >= 0 && scope.activeItemIndex < scope.dropdownItems.length)
+            if (scope.activeItemIndex >= 0)
                scope.selectItem(scope.dropdownItems[scope.activeItemIndex]);
             else
-               scope.selectItem({name: scope.inputValue ? scope.inputValue : "", id: 0});
+               scope.selectItem({name: scope.inputValue, id: 0});
          };
 
          element.bind("keydown keypress", function (event)
