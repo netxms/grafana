@@ -1,0 +1,35 @@
+<query-editor-row query-ctrl="ctrl" class="netxms-datasource-query-row" has-text-edit-mode="true">
+  <div class="gf-form max-width-8">
+    <select class="gf-form-input" ng-model="ctrl.target.type" ng-options="f as f for f in ['DCI', 'Alarms']" ng-change="ctrl.onSelectionChange()"></select>
+  </div>
+  <div ng-if="!(ctrl.target.type === 'DCI')">
+    <div class="gf-form max-width-40">
+      <label class="gf-form-label query-keyword width-5">Source</label>
+      <netxms-object-list input-placeholder="Select alarm source object" name="alarmSource" selected-item="ctrl.target.alarmSource"
+       get-list="ctrl.getSourceObjects()" on-selection="ctrl.onSelectionChange()"></netxms-object-list>
+    </div>
+  </div>
+
+  <div ng-if="ctrl.target.type === 'DCI'">
+    <div class="gf-form-inline">
+      <div class="gf-form max-width-40">
+        <label class="gf-form-label query-keyword width-5">Target</label>
+        <netxms-object-list input-placeholder="Select data collection target" name="dciTarget" selected-item="ctrl.target.dciTarget"
+         get-list="ctrl.getObjects()" on-selection="ctrl.clearDciField()"></netxms-object-list>
+      </div>
+    </div>
+    <div class="gf-form-inline">
+        <div class="gf-form max-width-40">
+          <label class="gf-form-label query-keyword width-5">DCI</label>
+          <netxms-object-list input-placeholder="Select data collection item" name="dci" selected-item="ctrl.target.dci"
+           get-list="ctrl.getDCIs()" on-selection="ctrl.onSelectionChange()"></netxms-object-list>
+        </div>
+    </div>
+    <div class="gf-form-inline">
+        <div class="gf-form max-width-40">
+          <label class="gf-form-label query-keyword width-5">Legend</label>
+          <input type="text" class="gf-form-input width-25" ng-model="ctrl.target.legend" ng-change="ctrl.onSelectionChange()" placeholder="Enter custom legend"></input>
+        </div>
+    </div>
+  </div>
+</query-editor-row>
