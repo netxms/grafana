@@ -34,8 +34,13 @@ export class NetXMSDatasource {
 
       return backendSrv.datasourceRequest(options).then(response =>
         {
-          if (response.headers("Session-Id"))
-            this.sessionId = response.headers("Session-Id");
+          if (typeof response.headers === 'function') {
+            if (response.headers("Session-Id")) {
+              this.sessionId = response.headers("Session-Id");
+            }
+          } else {
+            this.sessionId = response.headers.get("Session-Id");
+          }
           return response;
         });
     };
@@ -112,8 +117,8 @@ export class NetXMSDatasource {
   buildQueryParameters(options) {
     var parameters = {
       interval: options.intervalMs,
-      from: options.range.from,
-      to: options.range.to,
+      from: '"' + options.range.from.toISOString() + '"', // dirty hack to be compatible with old API
+      to: '"' + options.range.to.toISOString() + '"', // dirty hack to be compatible with old API
       targets: JSON.stringify(options.targets)
       /*annotation: {
       },*/

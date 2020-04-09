@@ -49,7 +49,13 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
       if (this.sessionId) options.headers["Session-Id"] = this.sessionId;
 
       return backendSrv.datasourceRequest(options).then(function (response) {
-        if (response.headers("Session-Id")) _this.sessionId = response.headers("Session-Id");
+        if (typeof response.headers === 'function') {
+          if (response.headers("Session-Id")) {
+            _this.sessionId = response.headers("Session-Id");
+          }
+        } else {
+          _this.sessionId = response.headers.get("Session-Id");
+        }
         return response;
       });
     };
@@ -125,8 +131,8 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
     value: function buildQueryParameters(options) {
       var parameters = {
         interval: options.intervalMs,
-        from: options.range.from,
-        to: options.range.to,
+        from: '"' + options.range.from.toISOString() + '"', // dirty hack to be compatible with old API
+        to: '"' + options.range.to.toISOString() + '"', // dirty hack to be compatible with old API
         targets: JSON.stringify(options.targets)
         /*annotation: {
         },*/

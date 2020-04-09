@@ -16,8 +16,8 @@
       "name": "Raden Solutions",
       "url": "http://radensolutions.com"
     },
-    "version": "1.2.1",
-    "updated": "2019-09-29",
+    "version": "1.2.2",
+    "updated": "2020-04-09",
     "logos": {
       "small": "img/netxms_logo.png",
       "large": "img/netxms_logo.png"
@@ -25,7 +25,7 @@
   },
 
   "dependencies": {
-    "grafanaVersion": "3.x.x",
+    "grafanaVersion": "5.2.0",
     "plugins": [ ]
   }
 }
