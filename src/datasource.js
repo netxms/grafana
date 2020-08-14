@@ -34,6 +34,7 @@ export class NetXMSDatasource {
 
       return backendSrv.datasourceRequest(options).then(response =>
         {
+          var sessionId = null;
           if (typeof response.headers === 'function') {
             sessionId = response.headers("Session-Id");
           } else {

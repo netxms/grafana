@@ -25,7 +25,7 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
     this.q = $q;
     this.backendSrv = backendSrv;
     this.templateSrv = templateSrv;
-    this.sessionId = 0;
+    this.sessionId = null;
     this.basicAuth = instanceSettings.basicAuth;
     this.withCredentials = instanceSettings.withCredentials;
 
@@ -49,12 +49,14 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
       if (this.sessionId) options.headers["Session-Id"] = this.sessionId;
 
       return backendSrv.datasourceRequest(options).then(function (response) {
+        var sessionId = null;
         if (typeof response.headers === 'function') {
-          if (response.headers("Session-Id")) {
-            _this.sessionId = response.headers("Session-Id");
-          }
+          sessionId = response.headers("Session-Id");
         } else {
-          _this.sessionId = response.headers.get("Session-Id");
+          sessionId = response.headers.get("Session-Id");
+        }
+        if (sessionId) {
+          _this.sessionId = sessionId;
         }
         return response;
       });
