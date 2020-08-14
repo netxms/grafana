@@ -10,7 +10,7 @@ export class NetXMSDatasource {
     this.q = $q;
     this.backendSrv = backendSrv;
     this.templateSrv = templateSrv;
-    this.sessionId = 0;
+    this.sessionId = null;
     this.basicAuth = instanceSettings.basicAuth;
     this.withCredentials = instanceSettings.withCredentials;
 
@@ -35,11 +35,12 @@ export class NetXMSDatasource {
       return backendSrv.datasourceRequest(options).then(response =>
         {
           if (typeof response.headers === 'function') {
-            if (response.headers("Session-Id")) {
-              this.sessionId = response.headers("Session-Id");
-            }
+            sessionId = response.headers("Session-Id");
           } else {
-            this.sessionId = response.headers.get("Session-Id");
+            sessionId = response.headers.get("Session-Id");
+          }
+          if (sessionId) {
+             this.sessionId = sessionId;
           }
           return response;
         });
