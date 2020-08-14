@@ -11,13 +11,13 @@
   "annotations": false,
 
   "info": {
-    "description": "NetXMS datasource for grafana",
+    "description": "NetXMS datasource for Grafana",
     "author": {
       "name": "Raden Solutions",
       "url": "http://radensolutions.com"
     },
-    "version": "1.2.2",
-    "updated": "2020-04-09",
+    "version": "1.2.3",
+    "updated": "2020-08-14",
     "logos": {
       "small": "img/netxms_logo.png",
       "large": "img/netxms_logo.png"
