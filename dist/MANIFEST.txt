@@ -1,0 +1,52 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "community",
+  "signedByOrg": "radensolutions",
+  "signedByOrgName": "Raden Solutions",
+  "plugin": "radensolutions-netxms-datasource",
+  "version": "1.2.3",
+  "time": 1628857991165,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "query_ctrl.js": "6df68c1885425ace2d8eeeeb78eaa3747823fd1d64fe4aae7425a521c1c04054",
+    "test/query_ctrl.js": "1202a56c3011d3f18a373f89404224145df6965f7615d8f9b473e646623a7402",
+    "test/query_ctrl.js.map": "b4f213d07900d6e4ad389bfc888aca6bac433fe9ad5b154ec876ac6b4256a110",
+    "test/netxms_objects_list_directive.js.map": "e7f43e9d655670804723d877c57a93db9afa7e207441478db29fe2a168be5325",
+    "test/module.js.map": "03bd2618e9cfaba9ce49a4f2bb177420caf1a17ddb5f5609e433265b7900daa6",
+    "test/module.js": "1160553427410983d5c00968123ceb3316bce643dc6010c9a852603f8a2c372b",
+    "test/datasource.js.map": "52ade1d2789d7028e83aad17c6611a0caee997eb37cf8c3b821e1dc75452a6b2",
+    "test/datasource.js": "593fcf394125ca61191473364bb1253126174ab25e171836e36f1617a7579b49",
+    "test/netxms_objects_list_directive.js": "8b5fe3f26e5cf6d21fb8532fffc1c123d837259b294de96422d376af655c4e92",
+    "css/query-editor.css": "3dea0c39413c1fee1e4eb51ccc90f02b59a4b19e6b9d2b2f7e956e10e4b8add4",
+    "query_ctrl.js.map": "419d90837b75b30e021891cd192da579c0d62ff54892efa3736a068581891b05",
+    "netxms_objects_list_directive.js.map": "7ffb92f90ec358cce81aef32f9a5e3b14f91a063e338d5c9db4e3f641d3ad242",
+    "module.js.map": "84b80aa9efb900fc69809082398a4a10018d71e96418092fc835b92a6da4956b",
+    "plugin.json": "0ae5ab56dcf115316588168eb1eda543a763daa573a826567049446e68ebd7b6",
+    "README.md": "6c78aedc05a195dd43bb753856e1ebe8a278f221f8aace8380e2ca5888e72560",
+    "img/grafana-screen.png": "fe9051f6f202e8a979e9afbda04c055c998f4dbd48a009a48a24c310980d7309",
+    "img/netxms_logo.png": "436364a7cea65eac285ff1233f063358dd11430c6c26faf2ade6668a5ea8c7b6",
+    "module.js": "ff0b55effb4f867dc07b1599002b31377c4bc84629bcdc34d812cac4cb2bc68e",
+    "datasource.js.map": "6fc3b3d129d271955336ecc78a4441440f0833ca33af457e3a8e5eec9081bb28",
+    "datasource.js": "62826409162b39aa2bd838c76cf935b8ed52bbfd6336f7ea43d224fb1decd36e",
+    "partials/annotations.editor.html": "56f582154fc4f43601ddef1ea902e65f60c6b5992683d43bb9b70e948b991361",
+    "partials/query.editor.html": "032ee6c84125ab6b978c4964fa6d3f31534760e94bf55bf577789d550800bdc1",
+    "partials/netxms_objectList_temp.html": "5347b622fd9675474512d6568e1d1e1c56be8ab5e9732c29424d403a7a0a313b",
+    "partials/query.options.html": "01570a3c97a66d192bf4986355a52b92b3ff5b45fe528d9e5849464e8b4e213d",
+    "partials/config.html": "d3306b5f56950e5a310713068328ca1a594df26f6d99f35881548194e5d038da",
+    "netxms_objects_list_directive.js": "7f9fcc653bfbf5e8c01f6d3a0046f1fcdebc3254af15f2a95f6f6781f07c9c25"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqIEARMKAAYFAmEWZocACgkQfk0ManCIZudJzwIJAXMKKILs68nquGAX3NfS
+TeLr1ACjxAItleWLoHFRadgTJncWN7rIRsnuyK2g+IQhI9vTl0yfm5x92/wB
+l9LteLCPAgkBSXBY0QTZ+mPVpbx5A7AJ/QJApF+qCcVcqWpWkxtMhg1QbiIK
+U5n6fYIxtPaH9OJUHtYeoky43EyAwNMFUCfPzAk=
+=tR6H
+-----END PGP SIGNATURE-----
