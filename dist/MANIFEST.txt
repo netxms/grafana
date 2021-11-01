@@ -8,8 +8,8 @@ Hash: SHA512
   "signedByOrg": "radensolutions",
   "signedByOrgName": "Raden Solutions",
   "plugin": "radensolutions-netxms-datasource",
-  "version": "1.2.3",
-  "time": 1628857991165,
+  "version": "1.2.4",
+  "time": 1635784387179,
   "keyId": "7e4d0c6a708866e7",
   "files": {
     "query_ctrl.js": "6df68c1885425ace2d8eeeeb78eaa3747823fd1d64fe4aae7425a521c1c04054",
@@ -25,7 +25,7 @@ Hash: SHA512
     "query_ctrl.js.map": "419d90837b75b30e021891cd192da579c0d62ff54892efa3736a068581891b05",
     "netxms_objects_list_directive.js.map": "7ffb92f90ec358cce81aef32f9a5e3b14f91a063e338d5c9db4e3f641d3ad242",
     "module.js.map": "84b80aa9efb900fc69809082398a4a10018d71e96418092fc835b92a6da4956b",
-    "plugin.json": "0ae5ab56dcf115316588168eb1eda543a763daa573a826567049446e68ebd7b6",
+    "plugin.json": "5c1bf42612d99f766773aaa9f7e22d3f9816c4b6abb4cfb8f02cad1f5ba4cf9f",
     "README.md": "6c78aedc05a195dd43bb753856e1ebe8a278f221f8aace8380e2ca5888e72560",
     "img/grafana-screen.png": "fe9051f6f202e8a979e9afbda04c055c998f4dbd48a009a48a24c310980d7309",
     "img/netxms_logo.png": "436364a7cea65eac285ff1233f063358dd11430c6c26faf2ade6668a5ea8c7b6",
@@ -44,9 +44,9 @@ Hash: SHA512
 Version: OpenPGP.js v4.10.1
 Comment: https://openpgpjs.org
 
-wqIEARMKAAYFAmEWZocACgkQfk0ManCIZudJzwIJAXMKKILs68nquGAX3NfS
-TeLr1ACjxAItleWLoHFRadgTJncWN7rIRsnuyK2g+IQhI9vTl0yfm5x92/wB
-l9LteLCPAgkBSXBY0QTZ+mPVpbx5A7AJ/QJApF+qCcVcqWpWkxtMhg1QbiIK
-U5n6fYIxtPaH9OJUHtYeoky43EyAwNMFUCfPzAk=
-=tR6H
+wqAEARMKAAYFAmGAFsMACgkQfk0ManCIZufwpQIHTHCTi2zJ6zwvcZSHYQT3
+mlmrX0Br1zyURfFeZC/9cNWsk62ZKHdmjqvUab+lDrLulKlfkZ899uTHDaZO
+k8ienacCBiy02IVEDvP05Ejpo4YX2UL34Nm0uDi2YOd2choy88RAX+XCbbr3
+E03NcGLgy/kPOCQ3lUOtrb6VLUZomGddHL18
+=k+gV
 -----END PGP SIGNATURE-----
