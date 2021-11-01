@@ -34,4 +34,4 @@ Manually:
 
 1. Clone the repository to your `$GRAFANA_HOME/data/plugins/datasources` directory
 2. run `yarn` to download and install the required dependencies
-3. run `grunt` to update for changes in the source
+3. run `yarn grunt` to update for changes in the source
