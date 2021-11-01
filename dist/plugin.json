@@ -1,31 +1,32 @@
 {
-  "name": "NetXMS",
-  "id": "radensolutions-netxms-datasource",
-  "type": "datasource",
-
-  "partials": {
-    "config": "partials/config.html"
-  },
-
-  "metrics": true,
-  "annotations": false,
-
-  "info": {
-    "description": "NetXMS datasource for Grafana",
-    "author": {
-      "name": "Raden Solutions",
-      "url": "http://radensolutions.com"
+    "dependencies": {
+        "grafanaDependency": ">=6.0.0"
     },
-    "version": "1.2.4",
-    "updated": "2021-11-01",
-    "logos": {
-      "small": "img/netxms_logo.png",
-      "large": "img/netxms_logo.png"
-    }
-  },
-
-  "dependencies": {
-    "grafanaVersion": "5.2.0",
-    "plugins": [ ]
-  }
+    "id": "radensolutions-netxms-datasource",
+    "info": {
+        "keywords": ["", "", ""],
+        "logos": {
+            "small": "img/netxms_logo.png",
+            "large": "img/netxms_logo.png"
+        },
+        "updated": "2021-11-01",
+        "version": "1.2.4",
+        "author": {
+            "email": "info@radensolutions.com",
+            "name": "Raden Solutions",
+            "url": "http://radensolutions.com"
+        },
+        "description": "NetXMS datasource for Grafana",
+        "screenshots": [
+            {
+                "name": "Screenshot 1",
+                "path": "img/grafana-screen.png"
+            }
+        ]
+    },
+    "name": "NetXMS",
+    "type": "datasource",
+    "metrics": true,
+    "annotations": false,
+    "state": "beta"
 }
