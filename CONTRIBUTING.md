@@ -13,6 +13,7 @@ Note: all command should be run in root folder
 1. `set -x GRAFANA_API_KEY …`
 1. `yarn grunt`
 1. `npx @grafana/toolkit plugin:sign`
-1. `rm -rf radensolutions-netxms-datasource cp -R dist radensolutions-netxms-datasource`
-1. `zip radensolutions-netxms-datasource-(rep version dist/plugin.json | cut -d\" -f4).zip radensolutions-netxms-datasource -r`
+1. `rm -rf radensolutions-netxms-datasource radensolutions-netxms-datasource-*.zip`
+1. `cp -R dist radensolutions-netxms-datasource`
+1. `zip radensolutions-netxms-datasource-(grep version dist/plugin.json | cut -d\" -f4).zip radensolutions-netxms-datasource -r`
 1. upload to https://grafana.com/ -> My Plugins
