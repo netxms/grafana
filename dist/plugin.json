@@ -4,13 +4,13 @@
     },
     "id": "radensolutions-netxms-datasource",
     "info": {
-        "keywords": ["", "", ""],
+        "keywords": ["netxms", "network monitoring", "nms"],
         "logos": {
             "small": "img/netxms_logo.png",
             "large": "img/netxms_logo.png"
         },
-        "updated": "2021-11-01",
-        "version": "1.2.4",
+        "updated": "2021-12-09",
+        "version": "1.2.5",
         "author": {
             "email": "info@radensolutions.com",
             "name": "Raden Solutions",

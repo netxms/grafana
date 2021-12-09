@@ -8,45 +8,45 @@ Hash: SHA512
   "signedByOrg": "radensolutions",
   "signedByOrgName": "Raden Solutions",
   "plugin": "radensolutions-netxms-datasource",
-  "version": "1.2.4",
-  "time": 1639047967363,
+  "version": "1.2.5",
+  "time": 1639052085935,
   "keyId": "7e4d0c6a708866e7",
   "files": {
-    "query_ctrl.js": "6df68c1885425ace2d8eeeeb78eaa3747823fd1d64fe4aae7425a521c1c04054",
-    "test/query_ctrl.js": "1202a56c3011d3f18a373f89404224145df6965f7615d8f9b473e646623a7402",
-    "test/query_ctrl.js.map": "b4f213d07900d6e4ad389bfc888aca6bac433fe9ad5b154ec876ac6b4256a110",
-    "test/netxms_objects_list_directive.js.map": "e7f43e9d655670804723d877c57a93db9afa7e207441478db29fe2a168be5325",
-    "test/module.js.map": "03bd2618e9cfaba9ce49a4f2bb177420caf1a17ddb5f5609e433265b7900daa6",
-    "test/module.js": "1160553427410983d5c00968123ceb3316bce643dc6010c9a852603f8a2c372b",
-    "test/datasource.js.map": "52ade1d2789d7028e83aad17c6611a0caee997eb37cf8c3b821e1dc75452a6b2",
-    "test/datasource.js": "593fcf394125ca61191473364bb1253126174ab25e171836e36f1617a7579b49",
-    "test/netxms_objects_list_directive.js": "8b5fe3f26e5cf6d21fb8532fffc1c123d837259b294de96422d376af655c4e92",
+    "query_ctrl.js": "f5538e5fc7bf85545bacaefab94675b2d41ec41a1ab587f2e35fb4610f02e3fa",
+    "test/query_ctrl.js": "f5538e5fc7bf85545bacaefab94675b2d41ec41a1ab587f2e35fb4610f02e3fa",
+    "test/query_ctrl.js.map": "fe3ec04e4eb35e73ff5a21050dca51a08ec41a84e56dd5f5c9dea255cda926b2",
+    "test/netxms_objects_list_directive.js.map": "d48bc802264db3e6f01a7668f597484b966b1d8646d4de9a4b3ac87cfcdeea90",
+    "test/module.js.map": "2f0ee2ac1f2a048537417fcb092ee61220a746a51eafc185b5a5b4205bdc73de",
+    "test/module.js": "1f6f7923cd9369d2935063b58dea92e940e3539e69c6a019e0f687544ee32908",
+    "test/datasource.js.map": "a46f15b26ad896ddc56d3bcea78917d3ec2620761725a8684a8f510a05328ae4",
+    "test/datasource.js": "1c9595c0762847ffa98e19c37ec704f98751ea34209d47e5728f6d85e9d17f6a",
+    "test/netxms_objects_list_directive.js": "58f9cda1c301f45755c0a9672ae4e618518cbf6eaa28f06775dcd36d2bbb109d",
     "css/query-editor.css": "3dea0c39413c1fee1e4eb51ccc90f02b59a4b19e6b9d2b2f7e956e10e4b8add4",
-    "query_ctrl.js.map": "419d90837b75b30e021891cd192da579c0d62ff54892efa3736a068581891b05",
-    "netxms_objects_list_directive.js.map": "7ffb92f90ec358cce81aef32f9a5e3b14f91a063e338d5c9db4e3f641d3ad242",
-    "module.js.map": "84b80aa9efb900fc69809082398a4a10018d71e96418092fc835b92a6da4956b",
-    "plugin.json": "0777ba7d3a38a8bb7941f6a3cb329de661cf86d11415ee403048fb6efab1a7be",
+    "query_ctrl.js.map": "a017f2d3faa58d7bc8558a537cc58a10563064670dd8af0015f54bde94d959a9",
+    "netxms_objects_list_directive.js.map": "09c02a3ff79a461e60215534cfc5393aab354ad3940a9825b16971436ef0bf67",
+    "module.js.map": "5a45e97f1acd772151445912df07405163696c0fc4af513c0a5f80b775c96f3c",
+    "plugin.json": "ada00d363960c49685b0b0f8a329446c030a000037b332d6bbe425c1813f9dbe",
     "README.md": "0952ebec17b60b4bbe6538810ebb8f7122706e320321b7a1e7c90a01289c3c05",
     "img/grafana-screen.png": "fe9051f6f202e8a979e9afbda04c055c998f4dbd48a009a48a24c310980d7309",
     "img/netxms_logo.png": "436364a7cea65eac285ff1233f063358dd11430c6c26faf2ade6668a5ea8c7b6",
-    "module.js": "ff0b55effb4f867dc07b1599002b31377c4bc84629bcdc34d812cac4cb2bc68e",
-    "datasource.js.map": "6fc3b3d129d271955336ecc78a4441440f0833ca33af457e3a8e5eec9081bb28",
-    "datasource.js": "62826409162b39aa2bd838c76cf935b8ed52bbfd6336f7ea43d224fb1decd36e",
+    "module.js": "1f6f7923cd9369d2935063b58dea92e940e3539e69c6a019e0f687544ee32908",
+    "datasource.js.map": "ef3b2c0c698e56e5e5e4c86b3abdf82dc09c75f49fef068b400625e19f7a7355",
+    "datasource.js": "1c9595c0762847ffa98e19c37ec704f98751ea34209d47e5728f6d85e9d17f6a",
     "partials/annotations.editor.html": "56f582154fc4f43601ddef1ea902e65f60c6b5992683d43bb9b70e948b991361",
     "partials/query.editor.html": "032ee6c84125ab6b978c4964fa6d3f31534760e94bf55bf577789d550800bdc1",
     "partials/netxms_objectList_temp.html": "5347b622fd9675474512d6568e1d1e1c56be8ab5e9732c29424d403a7a0a313b",
     "partials/query.options.html": "01570a3c97a66d192bf4986355a52b92b3ff5b45fe528d9e5849464e8b4e213d",
     "partials/config.html": "d3306b5f56950e5a310713068328ca1a594df26f6d99f35881548194e5d038da",
-    "netxms_objects_list_directive.js": "7f9fcc653bfbf5e8c01f6d3a0046f1fcdebc3254af15f2a95f6f6781f07c9c25"
+    "netxms_objects_list_directive.js": "58f9cda1c301f45755c0a9672ae4e618518cbf6eaa28f06775dcd36d2bbb109d"
   }
 }
 -----BEGIN PGP SIGNATURE-----
 Version: OpenPGP.js v4.10.1
 Comment: https://openpgpjs.org
 
-wqIEARMKAAYFAmGx4x8ACgkQfk0ManCIZueuQgIJAd6HYC8sUgEhcX/eckVu
-KAQyTuO/cHXUyctCjxerZQv2tT5B+W12EIZGzDZYSwVuAAJyLwVtRX3YmkdR
-3AY64kwuAgkB9CGOEd5t8Tg6sngT1FPfVpzRvQYTbH/mCCLptqjE+mVRJlV/
-ziTaXe4eahi0ktzfkw1/2yytrZ3RoD44Ez0QCcg=
-=VoiV
+wqEEARMKAAYFAmGx8zYACgkQfk0ManCIZucArgIIqrKLTGBUkTBLLl237U7G
+iwmfAd5QxR9Y6ZsofN8CE8N5EX9rWV8KbZP1/Zp586v6mlEfPZRP+UOTdKrp
+360eXwICCQGTLyWwJ/YlZ7lMIZO4Osj+1+AR+Jjz6wNzCyIt+jZAYi8DRJbX
+hh/JqqvoulUzLQOmncDWI+Ec8dHywHu2/tPw7g==
+=vL/P
 -----END PGP SIGNATURE-----

@@ -1,126 +1,129 @@
-'use strict';
+"use strict";
 
-var _angular = require('angular');
+var _angular = _interopRequireDefault(require("angular"));
 
-var _angular2 = _interopRequireDefault(_angular);
+var _lodash = _interopRequireDefault(require("lodash"));
 
-var _lodash = require('lodash');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _lodash2 = _interopRequireDefault(_lodash);
+_angular["default"].module('grafana.directives').directive('netxmsObjectList', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      getList: '&',
+      selectedItem: '=',
+      name: '@',
+      inputPlaceholder: '@',
+      onSelection: '&'
+    },
+    template: '<div class="netxms-object-list">' + '<input type="text"' + 'spellcheck="false"' + 'name="{{name}}"' + 'placeholder="{{inputPlaceholder}}"' + 'ng-model="inputValue"' + 'ng-change="inputChange()"' + 'ng-focus="inputFocus()"' + 'ng-blur="inputBlur($event)"' + 'class="gf-form-input' + ' width-25"' + 'autocomplete="off"' + 'input>' + '<ul ng-show="dropdownVisible">' + '<li ng-repeat="item in dropdownItems"' + 'ng-click="selectItem(item)"' + 'ng-mouseenter="setActive($index)"' + 'ng-mousedown="dropdownPressed()"' + 'ng-class="{\'active\': activeItemIndex === $index}"' + '>' + '<span>{{item.name}}</span>' + '</li>' + '</ul>' + '</div>',
+    link: function link(scope, element) {
+      var pressedDropdown = false;
+      scope.activeItemIndex = -1;
+      scope.selectedItem = _lodash["default"].isEmpty(scope.selectedItem) ? {
+        name: "",
+        id: 0
+      } : scope.selectedItem;
+      scope.inputValue = scope.selectedItem.name;
+      scope.dropdownVisible = false;
+      scope.$watch('dropdownItems', function (newValue, oldValue) {
+        if (!_angular["default"].equals(newValue, oldValue)) scope.setActive(-1);
+      });
+      scope.$watch('selectedItem', function (newValue, oldValue) {
+        if (!_angular["default"].equals(newValue, oldValue)) {
+          if (newValue) {
+            scope.inputValue = newValue.name;
+            scope.onSelection();
+          }
+        }
+      });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+      scope.setActive = function (itemIndex) {
+        scope.activeItemIndex = itemIndex;
+      };
 
-_angular2.default.module('grafana.directives').directive('netxmsObjectList', function () {
+      scope.inputChange = function () {
+        getFilteredList(scope.inputValue);
+      };
 
-   return {
-      restrict: 'E',
-      scope: {
-         getList: '&',
-         selectedItem: '=',
-         name: '@',
-         inputPlaceholder: '@',
-         onSelection: '&'
-      },
-      template: '<div class="netxms-object-list">' + '<input type="text"' + 'spellcheck="false"' + 'name="{{name}}"' + 'placeholder="{{inputPlaceholder}}"' + 'ng-model="inputValue"' + 'ng-change="inputChange()"' + 'ng-focus="inputFocus()"' + 'ng-blur="inputBlur($event)"' + 'class="gf-form-input' + ' width-25"' + 'autocomplete="off"' + 'input>' + '<ul ng-show="dropdownVisible">' + '<li ng-repeat="item in dropdownItems"' + 'ng-click="selectItem(item)"' + 'ng-mouseenter="setActive($index)"' + 'ng-mousedown="dropdownPressed()"' + 'ng-class="{\'active\': activeItemIndex === $index}"' + '>' + '<span>{{item.name}}</span>' + '</li>' + '</ul>' + '</div>',
-      link: function link(scope, element) {
-         var pressedDropdown = false;
-         scope.activeItemIndex = -1;
-         scope.selectedItem = _lodash2.default.isEmpty(scope.selectedItem) ? { name: "", id: 0 } : scope.selectedItem;
-         scope.inputValue = scope.selectedItem.name;
-         scope.dropdownVisible = false;
+      scope.inputFocus = function () {
+        getFilteredList(scope.inputValue);
+        showDropdown();
+      };
 
-         scope.$watch('dropdownItems', function (newValue, oldValue) {
-            if (!_angular2.default.equals(newValue, oldValue)) scope.setActive(-1);
-         });
+      scope.inputBlur = function (event) {
+        selectActiveItem();
 
-         scope.$watch('selectedItem', function (newValue, oldValue) {
-            if (!_angular2.default.equals(newValue, oldValue)) {
-               if (newValue) {
-                  scope.inputValue = newValue.name;
-                  scope.onSelection();
-               }
-            }
-         });
+        if (pressedDropdown) {
+          pressedDropdown = false;
+        }
 
-         scope.setActive = function (itemIndex) {
-            scope.activeItemIndex = itemIndex;
-         };
+        hideDropdown();
+      };
 
-         scope.inputChange = function () {
-            getFilteredList(scope.inputValue);
-         };
+      scope.dropdownPressed = function () {
+        pressedDropdown = true;
+      };
 
-         scope.inputFocus = function () {
-            getFilteredList(scope.inputValue);
-            showDropdown();
-         };
+      scope.selectItem = function (item) {
+        scope.selectedItem = item;
+        console.log(item);
+        hideDropdown();
+      };
 
-         scope.inputBlur = function (event) {
-            selectActiveItem();
-            if (pressedDropdown) {
-               pressedDropdown = false;
-            }
-            hideDropdown();
-         };
+      var getFilteredList = function getFilteredList(filterString) {
+        scope.getList().then(function (items) {
+          scope.dropdownItems = _lodash["default"].filter(items, function (item) {
+            return filterString == null ? true : item.name.toLowerCase().includes(filterString.toLowerCase());
+          });
+        });
+      };
 
-         scope.dropdownPressed = function () {
-            pressedDropdown = true;
-         };
+      var showDropdown = function showDropdown() {
+        scope.dropdownVisible = true;
+      };
 
-         scope.selectItem = function (item) {
-            scope.selectedItem = item;
-            console.log(item);
-            hideDropdown();
-         };
+      var hideDropdown = function hideDropdown() {
+        scope.dropdownVisible = false;
+      };
 
-         var getFilteredList = function getFilteredList(filterString) {
-            scope.getList().then(function (items) {
-               scope.dropdownItems = _lodash2.default.filter(items, function (item) {
-                  return filterString == null ? true : item.name.toLowerCase().includes(filterString.toLowerCase());
-               });
-            });
-         };
+      var selectPreviousItem = function selectPreviousItem() {
+        var prevIndex = scope.activeItemIndex - 1;
+        if (prevIndex >= -1) scope.setActive(prevIndex);
+      };
 
-         var showDropdown = function showDropdown() {
-            scope.dropdownVisible = true;
-         };
+      var selectNextItem = function selectNextItem() {
+        var nextIndex = scope.activeItemIndex + 1;
+        if (nextIndex < scope.dropdownItems.length) scope.setActive(nextIndex);
+      };
 
-         var hideDropdown = function hideDropdown() {
-            scope.dropdownVisible = false;
-         };
+      var selectActiveItem = function selectActiveItem() {
+        if (scope.activeItemIndex >= 0) scope.selectItem(scope.dropdownItems[scope.activeItemIndex]);else scope.selectItem({
+          name: scope.inputValue,
+          id: 0
+        });
+      };
 
-         var selectPreviousItem = function selectPreviousItem() {
-            var prevIndex = scope.activeItemIndex - 1;
-            if (prevIndex >= -1) scope.setActive(prevIndex);
-         };
+      element.bind("keydown keypress", function (event) {
+        switch (event.which) {
+          case 38:
+            //up
+            scope.$apply(selectPreviousItem);
+            break;
 
-         var selectNextItem = function selectNextItem() {
-            var nextIndex = scope.activeItemIndex + 1;
-            if (nextIndex < scope.dropdownItems.length) scope.setActive(nextIndex);
-         };
+          case 40:
+            //down
+            scope.$apply(selectNextItem);
+            break;
 
-         var selectActiveItem = function selectActiveItem() {
-            if (scope.activeItemIndex >= 0) scope.selectItem(scope.dropdownItems[scope.activeItemIndex]);else scope.selectItem({ name: scope.inputValue, id: 0 });
-         };
-
-         element.bind("keydown keypress", function (event) {
-            switch (event.which) {
-               case 38:
-                  //up
-                  scope.$apply(selectPreviousItem);
-                  break;
-               case 40:
-                  //down
-                  scope.$apply(selectNextItem);
-                  break;
-               case 13:
-                  // return
-                  event.preventDefault();
-                  scope.$apply(selectActiveItem);
-                  break;
-            }
-         });
-      }
-   };
+          case 13:
+            // return
+            event.preventDefault();
+            scope.$apply(selectActiveItem);
+            break;
+        }
+      });
+    }
+  };
 });
 //# sourceMappingURL=netxms_objects_list_directive.js.map

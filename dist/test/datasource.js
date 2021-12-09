@@ -3,19 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NetXMSDatasource = undefined;
+exports.NetXMSDatasource = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _lodash = _interopRequireDefault(require("lodash"));
 
-var _lodash = require("lodash");
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var NetXMSDatasource = exports.NetXMSDatasource = function () {
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var NetXMSDatasource = /*#__PURE__*/function () {
   function NetXMSDatasource(instanceSettings, $q, backendSrv, templateSrv) {
     _classCallCheck(this, NetXMSDatasource);
 
@@ -43,21 +43,25 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
       if (this.basicAuth || this.withCredentials) {
         options.withCredentials = true;
       }
+
       if (this.basicAuth) {
         options.headers["Authorization"] = this.basicAuth;
       }
-      if (this.sessionId) options.headers["Session-Id"] = this.sessionId;
 
+      if (this.sessionId) options.headers["Session-Id"] = this.sessionId;
       return backendSrv.datasourceRequest(options).then(function (response) {
         var sessionId = null;
+
         if (typeof response.headers === 'function') {
           sessionId = response.headers("Session-Id");
         } else {
           sessionId = response.headers.get("Session-Id");
         }
+
         if (sessionId) {
           _this.sessionId = sessionId;
         }
+
         return response;
       });
     };
@@ -68,7 +72,6 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
     value: function query(options) {
       var query = this.buildQueryParameters(options);
       if (query.targets.includes("type\":\"Alarms\"")) var url = "grafana/alarms";else var url = "grafana/datacollection";
-
       return this._request('GET', url, null, query);
     }
   }, {
@@ -79,14 +82,19 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
       return this._request('POST', 'sessions', null, null).then(function (response) {
         if (response.status === 200) {
           _this2._request('DELETE', 'sessions/' + response.data.session, null, null);
-          return { status: "success", message: "Data source is working", title: "Success" };
+
+          return {
+            status: "success",
+            message: "Data source is working",
+            title: "Success"
+          };
         }
       });
     }
-
     /*
      * Not implemented yet
      */
+
     /*annotationQuery(options) {
       var query = this.templateSrv.replace(options.annotation.query, {}, 'glob');
       var annotationQuery = {
@@ -121,9 +129,13 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
   }, {
     key: "mapToTextValue",
     value: function mapToTextValue(result) {
-      var map = _lodash2.default.map(result.data, function (d, i) {
-        return { name: d, id: i };
+      var map = _lodash["default"].map(result.data, function (d, i) {
+        return {
+          name: d,
+          id: i
+        };
       });
+
       return map.sort(function (a, b) {
         return a.name.localeCompare(b.name);
       });
@@ -133,11 +145,14 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
     value: function buildQueryParameters(options) {
       var parameters = {
         interval: options.intervalMs,
-        from: '"' + options.range.from.toISOString() + '"', // dirty hack to be compatible with old API
-        to: '"' + options.range.to.toISOString() + '"', // dirty hack to be compatible with old API
+        from: '"' + options.range.from.toISOString() + '"',
+        // dirty hack to be compatible with old API
+        to: '"' + options.range.to.toISOString() + '"',
+        // dirty hack to be compatible with old API
         targets: JSON.stringify(options.targets)
         /*annotation: {
         },*/
+
       };
       return parameters;
     }
@@ -145,4 +160,6 @@ var NetXMSDatasource = exports.NetXMSDatasource = function () {
 
   return NetXMSDatasource;
 }();
+
+exports.NetXMSDatasource = NetXMSDatasource;
 //# sourceMappingURL=datasource.js.map

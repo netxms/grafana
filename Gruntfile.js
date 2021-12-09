@@ -2,9 +2,6 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.loadNpmTasks('grunt-execute');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-
   grunt.initConfig({
 
     clean: ["dist"],
@@ -34,11 +31,10 @@ module.exports = function(grunt) {
     babel: {
       options: {
         sourceMap: true,
-        presets:  ['es2015']
+        presets: ['@babel/preset-env']
       },
       dist: {
         options: {
-          plugins: ['transform-es2015-modules-systemjs', 'transform-es2015-for-of']
         },
         files: [{
           cwd: 'src',
